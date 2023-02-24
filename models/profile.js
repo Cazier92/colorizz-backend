@@ -13,7 +13,12 @@ module.exports = (sequelize, DataTypes) => {
 
       Profile.hasMany(models.Paint, {
         as: 'paintsAdded',
-        foreignKey: 'profileId'
+        foreignKey: 'profileId',
+      })
+
+      Profile.hasOne(models.Palette, {
+        as: 'palette',
+        foreignKey: 'profileId',
       })
     }
   }

@@ -12,6 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Paint.belongsTo(models.Profile, { foreignKey: 'profileId' })
+
+      Paint.belongsToMany(models.Palette, {
+        as: 'paint',
+        through: models.PaintPalette,
+        foreignKey: 'paintId'
+      })
     }
   }
   Paint.init({
