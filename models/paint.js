@@ -14,10 +14,19 @@ module.exports = (sequelize, DataTypes) => {
       Paint.belongsTo(models.Profile, { foreignKey: 'profileId' })
 
       Paint.belongsToMany(models.Palette, {
-        as: 'paint',
+        as: 'palettes',
         through: models.PaintPalette,
         foreignKey: 'paintId'
       })
+
+      Paint.belongsToMany(models.Mixture, {
+        as: 'mixtures',
+        through: models.PaintMixture,
+        foreignKey: 'paintId'
+      })
+      // Paint.belongsTo(models.Palette, {
+      //   foreignKey: 'paletteId'
+      // })
     }
   }
   Paint.init({

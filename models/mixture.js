@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Palette extends Model {
+  class Mixture extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,22 +11,24 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Palette.belongsTo(models.Profile, {
-        foreignKey: 'profileId'
-      })
-      
-      Palette.belongsToMany(models.Paint, {
+      Mixture.belongsTo(models.Profile, { foreignKey: 'profileId' })
+
+      Mixture.belongsToMany(models.Paint, {
         as: 'paints',
-        through: models.PaintPalette,
-        foreignKey: 'paletteId',
+        through: models.PaintMixture,
+        foreignKey: 'mixtureId'
       })
-      // Palette.hasMany(models.Paint, {
-      //   foreignKey: 'paletteId',
-      //   as: 'paints'
-      // })
     }
   }
-  Palette.init({
+  Mixture.init({
+    color: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     profileId: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -38,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'Palette',
+    modelName: 'Mixture',
   });
-  return Palette;
+  return Mixture;
 };

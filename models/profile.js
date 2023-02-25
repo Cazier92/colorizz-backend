@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         as: 'paintsAdded',
         foreignKey: 'profileId',
       })
+      Profile.hasMany(models.Mixture, {
+        as: 'mixtures',
+        foreignKey: 'profileId',
+      })
 
       Profile.hasOne(models.Palette, {
         as: 'palette',

@@ -10,7 +10,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       paintId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Paints',
+          key: 'id'
+        }
+      },
+      paletteId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Paints',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

@@ -8,6 +8,7 @@ const profilesRouter = require('./routes/profiles.js')
 const authRouter = require('./routes/auth.js')
 const paintsRouter = require('./routes/paints.js')
 const palettesRouter = require('./routes/palettes.js')
+const mixturesRouter = require('./routes/mixtures.js')
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use('/api/profiles', profilesRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/paints', paintsRouter)
 app.use('/api/palettes', palettesRouter)
+app.use('/api/mixtures', mixturesRouter)
 
 app.use(function (req, res, next) {
   res.status(404).json({ err: 'Not found' })

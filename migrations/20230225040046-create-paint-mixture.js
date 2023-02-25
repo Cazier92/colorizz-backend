@@ -2,20 +2,27 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Palettes', {
+    await queryInterface.createTable('PaintMixtures', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      profileId: {
+      paintId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         onDelete: 'CASCADE',
         references: {
-          model: 'Profiles',
-          key: 'id',
+          model: 'Paints',
+          key: 'id'
+        }
+      },
+      mixtureId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Paints',
+          key: 'id'
         }
       },
       createdAt: {
@@ -29,6 +36,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Palettes');
+    await queryInterface.dropTable('PaintMixtures');
   }
 };

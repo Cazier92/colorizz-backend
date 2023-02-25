@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class PaintPalette extends Model {
+  class PaintMixture extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,18 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // PaintPalette.belongsTo()
-      // PaintPalette.hasMany(models.Paint, {
-      //   as: 'paints',
-      //   foreignKey: 'paintPaletteId',
-      // })
-      // PaintPalette.hasMany(models.Palette, {
-      //   as: 'palettes',
-      //   foreignKey: 'paintPaletteId',
-      // })
     }
   }
-  PaintPalette.init({
+  PaintMixture.init({
     paintId: {
       type: DataTypes.INTEGER,
       onDelete: 'CASCADE',
@@ -31,17 +22,17 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       }
     },
-    paletteId: {
+    mixtureId: {
       type: DataTypes.INTEGER,
       onDelete: 'CASCADE',
       references: {
-        model: 'Paints',
+        model: 'Mixtures',
         key: 'id'
       }
-    },
+    }
   }, {
     sequelize,
-    modelName: 'PaintPalette',
+    modelName: 'PaintMixture',
   });
-  return PaintPalette;
+  return PaintMixture;
 };

@@ -10,7 +10,11 @@ const { decodeUserFromToken, checkAuth } = middleware
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
 
+router.get('/:paletteId', checkAuth, palettesCtrl.show)
+
 router.post('/', checkAuth, palettesCtrl.create)
+
+router.post('/:paletteId/paints/:paintId', checkAuth, palettesCtrl.associatePaint)
 
 
 
