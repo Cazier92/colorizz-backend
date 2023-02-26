@@ -12,16 +12,21 @@ const create = async (req, res) => {
 
 const associatePaint = async (req, res) => {
   try {
-    const { mixtureId, paintId } = req.params
+    const mixtureId = req.params.mixtureId
+    const paintId = req.params.paintId
 
+    console.log(mixtureId)
+    console.log(paintId)
     const association = await PaintMixture.create({
-      paintId: paintId, mixtureId: mixtureId
+      paintId: paintId, mixtureId: mixtureId,
     })
     res.status(200).json(association)
   } catch (error) {
     res.status(500).json(error)
   }
 }
+
+
 
 const index = async (req, res) => {
   try {

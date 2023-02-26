@@ -19,15 +19,33 @@ async function create(req, res) {
 async function associatePaint(req, res) {
   try {
     const paletteId = req.params.paletteId
-    console.log(paletteId, 'PaletteId')
     const paintId = req.params.paintId
-    console.log(paintId, 'paintId')
     const association = await PaintPalette.create({
       paletteId: paletteId,
       paintId: paintId,
     })
-    console.log(association, 'HELOLOLOLOL')
     res.status(200).json(association)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ err: error })
+  }
+}
+
+async function removePaint(req, res) {
+  try {
+    const paletteId = req.params.paletteId
+    const paintId = req.params.paintId
+    const palette = await Palette.findByPk(paletteId, {
+      include: [
+        {model: Paint, as: 'paints'}
+      ]
+    })
+    const association = await PaintPalette.findOne({
+      where: {paletteId: paletteId, paintId: paintId}
+    })
+    await association.destroy()
+    
+    res.status(200).json(palette)
   } catch (error) {
     console.log(error)
     res.status(500).json({ err: error })
@@ -49,4 +67,5 @@ module.exports = {
   create,
   associatePaint,
   show,
+  removePaint,
 }
