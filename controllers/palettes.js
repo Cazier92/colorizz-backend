@@ -63,9 +63,25 @@ async function show(req, res) {
   }
 }
 
+async function index(req, res) {
+  try {
+    const palettes = await Palette.findAll({
+      include: [
+        {model: Paint, as: 'paints'}
+
+      ]
+      
+    })
+    res.status(200).json(palettes)
+  } catch (error) {
+    res.status(500).json({ err: error })
+  }
+}
+
 module.exports = {
   create,
   associatePaint,
   show,
   removePaint,
+  index,
 }
