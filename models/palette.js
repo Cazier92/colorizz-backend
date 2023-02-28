@@ -36,9 +36,6 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id',
       }
     },
-    name: {
-      type: DataTypes.STRING,
-    }
   }, {
     sequelize,
     modelName: 'Palette',

@@ -20,16 +20,11 @@ async function associatePaint(req, res) {
   try {
     const paletteId = req.params.paletteId
     const paintId = req.params.paintId
-    const palette = await Palette.findByPk(paletteId, {
-      include: [
-        {model: Paint, as: 'paints'}
-      ]
-    })
     const association = await PaintPalette.create({
       paletteId: paletteId,
       paintId: paintId,
     })
-    res.status(200).json(palette)
+    res.status(200).json(association)
   } catch (error) {
     console.log(error)
     res.status(500).json({ err: error })
