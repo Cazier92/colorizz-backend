@@ -12,9 +12,9 @@ router.use(decodeUserFromToken)
 
 router.get('/', checkAuth, palettesCtrl.index)
 
-router.get('/:paletteId', checkAuth, palettesCtrl.show)
-
 router.post('/', checkAuth, palettesCtrl.create)
+
+router.get('/:paletteId', checkAuth, palettesCtrl.show)
 
 router.post('/:paletteId/paints/:paintId', checkAuth, palettesCtrl.associatePaint)
 
