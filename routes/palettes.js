@@ -18,6 +18,8 @@ router.get('/:paletteId', checkAuth, palettesCtrl.show)
 
 router.post('/:paletteId/paints/:paintId', checkAuth, palettesCtrl.associatePaint)
 
+router.delete('/:paletteId', checkAuth, palettesCtrl.delete)
+
 router.delete('/:paletteId/paints/:paintId', checkAuth, palettesCtrl.removePaint)
 
 

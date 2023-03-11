@@ -83,10 +83,28 @@ async function index(req, res) {
   }
 }
 
+async function deletePalette(req, res) {
+  try{
+    const palette = await Palette.findByPk(req.params.paletteId)
+    if (palette.profileId === req.user.profile.id) {
+      await palette.destroy()
+
+      res.status(200).json(palette)
+    } else {
+      throw new Error(
+        'Not Authorized'
+      )
+    }
+  } catch (error) {
+    res.status(500).json({ err: error })
+  }
+}
+
 module.exports = {
   create,
   associatePaint,
   show,
   removePaint,
   index,
+  delete: deletePalette
 }
